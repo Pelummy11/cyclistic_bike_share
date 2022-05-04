@@ -378,26 +378,42 @@ GROUP BY route, duration, member_casual
 HAVING member_casual = 'member'
 ORDER BY num_of_trips DESC
 
---- Average number of rides each day of the  week
-SELECT  week_day, COUNT(*) AS avg_num_rides
+--- Total  number of rides each day of the  week
+SELECT  week_day, COUNT(*) AS num_of_rides
 FROM bike_share_dataset
 GROUP BY week_day
-ORDER BY avg_num_rides DESC
+ORDER BY week_day 
 
----- Average number of rides each day of the  week for member riders
-SELECT  week_day, member_casual, COUNT(*) AS avg_member_num_rides
+---- Total number of rides each day of the  week for member riders
+SELECT  week_day, member_casual, COUNT(*) AS member_num_rides
 FROM bike_share_dataset
 GROUP BY week_day, member_casual
 HAVING member_casual = 'member'
-ORDER BY avg_member_num_rides DESC
+ORDER BY week_day 
 
---- Average number of rides each day of the  week for casual riders
-SELECT  week_day, member_casual, COUNT(*) AS avg_member_num_rides
+--- Total  number of rides each day of the  week for casual riders
+SELECT  week_day, member_casual, COUNT(*) AS casual_num_rides
 FROM bike_share_dataset
 GROUP BY week_day, member_casual
 HAVING member_casual = 'casual'
-ORDER BY avg_member_num_rides 
+ORDER BY week_day 
 
+--- Number of rides per month
+SELECT   month, COUNT(*) AS num_rides_month
+FROM bike_share_dataset
+GROUP BY month
+ORDER BY month
 
+--- Number of rides per month for Member riders
+SELECT member_casual, month, COUNT(*) AS member_ride_month
+FROM bike_share_dataset
+GROUP BY member_casual, month
+HAVING member_casual = 'member'
+ORDER BY month 
 
-
+--- Number of rides per month for Casual riders
+SELECT member_casual, month, COUNT(*) AS casual_ride_month
+FROM bike_share_dataset
+GROUP BY member_casual, month
+HAVING member_casual = 'casual'
+ORDER BY month 
